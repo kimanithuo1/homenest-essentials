@@ -1,13 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom"; // Import BrowserRouter
+import { StrictMode } from "react"; // Import StrictMode
 import App from "./App.jsx";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <BrowserRouter> {/* Wrap App in BrowserRouter */}
+    {/* Remove BrowserRouter to avoid nesting */}
       <App />
-    </BrowserRouter>
   </React.StrictMode>,
 );

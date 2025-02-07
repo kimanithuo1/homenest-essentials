@@ -1,9 +1,8 @@
 import React from "react";
 "use client"
 import { useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, Star, ShoppingCart } from "lucide-react"
 import { Link } from "react-router-dom"
-
 
 const products = [
   {
@@ -76,16 +75,33 @@ const FeaturedProducts = () => {
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
+                  {/* <div className="absolute top-2 right-2 bg-white rounded-full p-1">
+                    <Heart className="h-5 w-5 text-gray-500 hover:text-red-500 cursor-pointer" />
+                  </div> */}
                 </div>
-                <div className="p-6">
+                <div className="p-4">
                   <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
-                  <p className="text-neutral-text mb-4">${product.price.toFixed(2)}</p>
-                  <Link
-                    href={product.link}
-                    className="inline-flex items-center justify-center w-full bg-primary hover:bg-primary-hover text-white px-6 py-2 rounded-full transition-colors"
-                  >
-                    View Product
-                  </Link>
+                  <div className="flex items-center mb-2">
+                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                    <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                    <Star className="h-4 w-4 text-gray-300 fill-current" />
+                    <span className="ml-1 text-sm text-gray-500">(4.0)</span>
+                  </div>
+                  <p className="text-gray-600 mb-4">${product.price.toFixed(2)}</p>
+                  <div className="flex justify-between items-center">
+                    <Link
+                      href={product.link}
+                      className="bg-[#E67E22] hover:bg-[#D35400] text-white px-4 py-2 rounded-full transition-colors inline-flex items-center"
+                    >
+                      <ShoppingCart className="h-4 w-4 mr-2" />
+                      Add to Cart
+                    </Link>
+                    <Link href={product.link} className="text-[#E67E22] hover:text-[#D35400] transition-colors">
+                      View Details
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}

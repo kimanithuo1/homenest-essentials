@@ -1,28 +1,33 @@
-import React from 'react'; // Add this line
+import React from 'react'; 
 "use client"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Header from "./components/Header"
-import HeroSection from "./components/HeroSection"
-import CategoryHighlights from "./components/CategoryHighlights"
-import FeaturedProducts from "./components/FeaturedProducts"
-import Testimonials from "./components/Testimonials"
-import CtaSection from "./components/CtaSection"
 import Footer from "./components/Footer"
+import Home from "./pages/Home"
+import Shop from "./pages/Shop"
+import About from "./pages/About"
+import Contact from "./pages/Contact"
+import Auth from "./pages/Auth"
 import BackToTop from "./components/BackToTop"
 
 function App() {
   return (
-    <div className="font-sans">
-      <Header />
-      <main>
-        <HeroSection />
-        <CategoryHighlights />
-        <FeaturedProducts />
-        <Testimonials />
-        <CtaSection />
-      </main>
-      <Footer />
-      <BackToTop />
-    </div>
+    <Router>
+      <div className="flex flex-col min-h-screen">
+        <Header />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Auth />} />
+          </Routes>
+        </main>
+        <Footer />
+        <BackToTop />
+      </div>
+    </Router>
   )
 }
 
