@@ -1,27 +1,15 @@
+;("use client")
 import React from "react";
-"use client"
-
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { ShoppingCart, Heart, Search, Menu, X, ChevronDown } from "lucide-react"
+import { ShoppingCart, Heart, Search, Menu, X } from "lucide-react"
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isShopDropdownOpen, setIsShopDropdownOpen] = useState(false)
 
   const routes = [
     { name: "Home", path: "/" },
-    {
-      name: "Shop",
-      path: "/shop",
-      subMenu: [
-        { name: "All Products", path: "/shop" },
-        { name: "Kitchen & Cooking", path: "/shop/kitchen" },
-        { name: "House & Garden", path: "/shop/garden" },
-        { name: "Fashion & Beauty", path: "/shop/fashion" },
-        { name: "Home Decor", path: "/shop/decor" },
-      ],
-    },
+    { name: "Shop", path: "/shop" },
     { name: "About Us", path: "/about" },
     { name: "Contact", path: "/contact" },
     { name: "Login/Register", path: "/login" },
@@ -29,44 +17,16 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+      <div className="container mx-auto px-4 h-16 flex items-center justify-between flex-wrap">
         <Link to="/" className="text-2xl font-bold text-[#2C3E50]">
           HomeNest Essentials
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-8">
+        <nav className="hidden md:flex items-center space-x-8 flex-wrap">
           {routes.map((route) => (
-            <div key={route.path} className="relative group">
-              {route.subMenu ? (
-                <>
-                  <button
-                    className="text-[#2C3E50] hover:text-[#E67E22] transition-colors flex items-center"
-                    onClick={() => setIsShopDropdownOpen(!isShopDropdownOpen)}
-                  >
-                    {route.name}
-                    <ChevronDown className="ml-1 h-4 w-4" />
-                  </button>
-                  {isShopDropdownOpen && (
-                    <div className="absolute top-full left-0 bg-white shadow-md rounded-md py-2">
-                      {route.subMenu.map((subItem) => (
-                        <Link
-                          key={subItem.path}
-                          to={subItem.path}
-                          className="block px-4 py-2 text-[#2C3E50] hover:bg-gray-100"
-                          onClick={() => setIsShopDropdownOpen(false)}
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <Link to={route.path} className="text-[#2C3E50] hover:text-[#E67E22] transition-colors">
-                  {route.name}
-                </Link>
-              )}
-            </div>
+            <Link key={route.path} to={route.path} className="text-[#2C3E50] hover:text-[#E67E22] transition-colors">
+              {route.name}
+            </Link>
           ))}
         </nav>
 
@@ -96,14 +56,14 @@ const Header = () => {
 
           <Link
             to="/shop"
-            className="hidden md:inline-flex bg-[#E67E22] hover:bg-[#D35400] text-white px-6 py-2 rounded-full transition-colors"
+            className="hidden md:inline-flex bg-[#E67E22] hover:bg-[#D35400] text-white px-4 py-2 rounded-full transition-colors text-sm"
           >
             Shop Now
           </Link>
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-[#2C3E50] hover:text-[#E67E22] transition-colors"
+            className="md:hidden text-[#2C3E50] hover:text-[#E67E22] transition-colors ml-4"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

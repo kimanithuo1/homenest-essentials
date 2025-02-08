@@ -1,12 +1,10 @@
-import React from 'react';
 "use client"
 
-import { useState, useEffect } from "react"
-//import { Slider } from "src/components/ui/Slider.tsx";
-//import { Checkbox } from "src/components/ui/Checkbox.tsx";
-
+import React from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
-import { Loader2 } from "lucide-react"
+import { Slider } from "../components/ui/slider"
+import { Checkbox } from "../components/ui/checkbox"
 
 const categories = [
   { id: "kitchen", label: "Kitchen & Cooking" },
@@ -25,24 +23,31 @@ const products = [
   },
   {
     id: 2,
-    name: "Cozy Blanket",
-    price: 39.99,
-    category: "decor",
-    image: "https://images.pexels.com/photos/6032280/pexels-photo-6032280.jpeg",
-  },
-  {
-    id: 3,
     name: "Ceramic Vase",
-    price: 29.99,
+    price: 39.99,
     category: "decor",
     image: "https://images.pexels.com/photos/5824901/pexels-photo-5824901.jpeg",
   },
   {
+    id: 3,
+    name: "Kitchen Mixer",
+    price: 129.99,
+    category: "kitchen",
+    image: "https://images.pexels.com/photos/4051221/pexels-photo-4051221.jpeg",
+  },
+  {
     id: 4,
-    name: "Wooden Chair",
-    price: 89.99,
-    category: "furniture",
-    image: "https://images.pexels.com/photos/1148955/pexels-photo-1148955.jpeg",
+    name: "Garden Chair",
+    price: 79.99,
+    category: "garden",
+    image: "https://images.pexels.com/photos/2253643/pexels-photo-2253643.jpeg",
+  },
+  {
+    id: 5,
+    name: "Makeup Set",
+    price: 49.99,
+    category: "fashion",
+    image: "https://images.pexels.com/photos/2253833/pexels-photo-2253833.jpeg",
   },
 ]
 
@@ -50,24 +55,11 @@ const Shop = () => {
   const [selectedCategories, setSelectedCategories] = useState([])
   const [priceRange, setPriceRange] = useState([0, 1000])
   const [sortBy, setSortBy] = useState("featured")
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 1000)
-  }, [])
 
   const filteredProducts = products.filter((product) => {
     const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(product.category)
     const matchesPrice = product.price >= priceRange[0] && product.price <= priceRange[1]
     return matchesCategory && matchesPrice
-  })
-
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    if (sortBy === "price-low") return a.price - b.price
-    if (sortBy === "price-high") return b.price - a.price
-    return 0
   })
 
   return (
@@ -126,20 +118,17 @@ const Shop = () => {
               <option value="featured">Featured</option>
               <option value="price-low">Price: Low to High</option>
               <option value="price-high">Price: High to Low</option>
+              <option value="newest">Newest</option>
             </select>
           </div>
         </div>
 
         {/* Products Grid */}
         <div className="lg:col-span-3">
-          {isLoading ? (
-            <div className="flex justify-center items-center h-64">
-              <Loader2 className="h-8 w-8 animate-spin text-[#E67E22]" />
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {sortedProducts.map((product) => (
-                <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProducts.map((product) => (
+              <div key={product.id} className="bg-white rounded-lg shadow-md overflow-hidden">
+                <Link to={`/shop/${product.category}/${product.id}`}>
                   <img
                     src={product.image || "/placeholder.svg"}
                     alt={product.name}
@@ -148,17 +137,14 @@ const Shop = () => {
                   <div className="p-4">
                     <h3 className="text-lg font-semibold">{product.name}</h3>
                     <p className="text-gray-600">${product.price.toFixed(2)}</p>
-                    <Link
-                      to={`/product/${product.id}`}
-                      className="mt-4 w-full bg-[#E67E22] hover:bg-[#D35400] text-white px-4 py-2 rounded-full transition-colors inline-block text-center"
-                    >
+                    <button className="mt-4 w-full bg-[#E67E22] hover:bg-[#D35400] text-white px-4 py-2 rounded-full transition-colors">
                       View Product
-                    </Link>
+                    </button>
                   </div>
-                </div>
-              ))}
-            </div>
-          )}
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -166,3 +152,4 @@ const Shop = () => {
 }
 
 export default Shop
+

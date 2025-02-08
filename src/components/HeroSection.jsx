@@ -1,6 +1,6 @@
+;("use client")
 import React from "react";
 import { Link } from "react-router-dom"
-
 
 const HeroSection = () => {
   return (
@@ -19,13 +19,13 @@ const HeroSection = () => {
         </p>
         <div className="flex items-center justify-center gap-4">
           <Link
-            href="/shop"
+            to="/shop"
             className="bg-primary hover:bg-primary-hover text-white px-8 py-3 rounded-full transition-colors"
           >
             Shop Now
           </Link>
           <Link
-            href="/about"
+            to="/about"
             className="bg-white/10 hover:bg-white/20 text-white border-2 border-white px-8 py-3 rounded-full transition-colors"
           >
             Learn More
@@ -37,3 +37,4 @@ const HeroSection = () => {
 }
 
 export default HeroSection
+

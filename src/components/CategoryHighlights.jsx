@@ -1,36 +1,35 @@
-import React from 'react'; // Add this line
+import React from 'react'; 
 "use client"
 import { Link } from "react-router-dom"
 
-
 const categories = [
   {
+    id: "kitchen",
     title: "Kitchen & Cooking",
     emoji: "🍽️",
     description: "Discover amazing products for your kitchen & cooking.",
     image: "https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg",
-    link: "/shop/kitchen",
   },
   {
+    id: "garden",
     title: "House & Garden",
     emoji: "🌿",
     description: "Discover amazing products for your house & garden.",
     image: "https://images.pexels.com/photos/2132227/pexels-photo-2132227.jpeg",
-    link: "/shop/garden",
   },
   {
+    id: "fashion",
     title: "Fashion & Beauty",
     emoji: "💄",
     description: "Discover amazing products for your fashion & beauty.",
     image: "https://images.pexels.com/photos/1536619/pexels-photo-1536619.jpeg",
-    link: "/shop/fashion",
   },
   {
+    id: "decor",
     title: "Home Decor",
     emoji: "🏡",
     description: "Discover amazing products for your home decor.",
     image: "https://images.pexels.com/photos/1571471/pexels-photo-1571471.jpeg",
-    link: "/shop/decor",
   },
 ]
 
@@ -42,7 +41,7 @@ const CategoryHighlights = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {categories.map((category) => (
             <div
-              key={category.title}
+              key={category.id}
               className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-shadow"
             >
               <div className="relative h-48 overflow-hidden">
@@ -58,7 +57,7 @@ const CategoryHighlights = () => {
                 </h3>
                 <p className="text-neutral-text mb-4">{category.description}</p>
                 <Link
-                  href={category.link}
+                  href={`/shop/${category.id}`}
                   className="inline-flex items-center justify-center w-full bg-accent-green hover:bg-accent-hover text-white px-6 py-2 rounded-full transition-colors"
                 >
                   Explore
